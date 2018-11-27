@@ -1,51 +1,27 @@
-Random Town Picker
-=============
+# RescueAngular
 
-## Guidelines
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
-Create an app that allows users to enter multiple towns in the U.S. to be stored. Once a few towns are entered, the app should randomly select a town for user to visit when a user clicks "Select a town".
+## Development server
 
-Feel free to add any additional functionality to the app to showcase your development muscles.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## App Spec
+## Code scaffolding
 
-### Data ###
-The user should be able to enter to following data:
-1. Town name
-2. State (select from a dropdown)
-3. Zipcode (if you choose it to be useful)
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-The app should display the following data on the screen:
-1. Town name
-2. State
-3. Timezone
-4. Current time
+## Build
 
-### Must Use ###
-Angular CLI
-Angular Material
-Observables
-Sass
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-### UI ###
-Simple UI design is required for this project. The user should be able to see the form to enter data and currently existing data. The design specifics are up to you.
+## Running unit tests
 
-### Functionality ###
-User should not be able to enter invalid characters into the fields.
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-### Database ###
-It's up to you if you want to use MongoDB or MySql for this app. Use whichever backend framework you prefer.
+## Running end-to-end tests
 
-### 3rd Party API ###
-The plugin should use 3rd party API to populate the state drowpdown, town's timezone, and current time. 
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-### Submitting the app ###
-It's up to you if you want to do a periodical push to the repository or if you submit all the work at once. If there are any specific installtion instructions for the plugin, they should be located in the plugin readme file. If you think you should
+## Further help
 
-### Evaluation ###
-We will be evaluating your work based on:
-    1. Following Angular Standards
-    2. Functionality of the app
-    3. Visual Design
-    4. Interaction Design
-    5. Any additional work/thoughts you put into the app
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
