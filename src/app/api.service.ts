@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
 @Injectable()
-export class SearchService {
+export class ApiService {
   serverUrl: string = 'http://localhost:8888?search=';
 
   constructor(private httpClient: HttpClient) { }
 
-  search(terms: Observable<string>) {
-    // Add buffer on amount of calls to make
-    return terms.debounceTime(400)
-      .distinctUntilChanged()
-      .switchMap(term => this.searchEntries(term));
+  getRandomCity() {
+    // ADD responseType 'text' to fix bug
+    // https://github.com/angular/angular/issues/18396#issuecomment-337137624
+    return this.httpClient.get(this.serverUrl, {responseType: 'text'});
   }
 
-  searchEntries(term) {
-    return this.httpClient.get(this.serverUrl + term);
+  addCity(data) {
+    return this.httpClient.post(this.serverUrl, data,{responseType: 'text'});
   }
 }

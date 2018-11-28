@@ -1,4 +1,16 @@
 <div class="col-md-12">
-  <h2 id="container-title">Current Towns</h2>
+
+  <h2 class="title">Click The Button for a random city!</h2>
+
+  <button class="randomize btn btn-default orange-button center-button" (click)="randomize()">Randomize!</button>
+
+  <h1 class="random-title"
+      [ngClass]="checkRandomSelected()">Your Random City is...</h1>
+  <div class="random-result"
+       [ngClass]="checkRandomSelected()">ree</div>
+
+  <h2 class="title">Current Towns</h2>
+
+
 </div>
 

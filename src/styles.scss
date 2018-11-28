@@ -1,5 +1,5 @@
-$green: #AAFF00;
 $blue: #4174C7;
+$hover-blue: rgba(65, 116, 199, 0.15);
 
 html, body {
   height: 100%;
@@ -14,6 +14,13 @@ body {
 app-root {
   display: block;
   height: 67%;
+}
+
+app-navigation {
+  display: grid;
+  width: 100%;
+  position: absolute;
+  bottom: 12%;
 }
 
 #navbar {
@@ -92,6 +99,7 @@ app-root {
 
 #app-title {
   text-align: center;
+  padding: 1%;
 }
 
 #app-title h1 {
@@ -107,7 +115,7 @@ app-root {
   text-align: center;
 }
 
-#container-title {
+.title {
   text-align: center;
   margin-top: 3%;
   font-size: 22px;
@@ -115,14 +123,30 @@ app-root {
   color: #616161;
 }
 
-#search-bar {
-  margin: 3% 25% 0% 25%;
+.show-page {
+  display: block;
+}
+
+.hide-page {
+  display: none;
+}
+
+.error, .success {
+  width: 40%;
+  margin: auto;
   text-align: center;
-  font-size: 20px;
-  width: 50%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
+  margin-top: 2%;
+}
+
+.randomize {
+  margin: auto;
+  margin-top: 2%;
+}
+
+.add-city {
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 #search-results {
@@ -145,4 +169,111 @@ app-root {
 .search-result:hover {
   background-image: radial-gradient(circle, rgba(65, 116, 199, 0.12) 5%, #FFFFFF 60%);
   cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  width: 30%;
+  margin: auto;
+}
+
+.orange-button {
+  position: absolute;
+  right: 0;
+  background: orange;
+  color: white;
+  border: white;
+  padding: .5% 1% .5% 1%;
+  font-size: 20px;
+  font-weight: 300;
+  margin-right: 2%
+}
+
+.orange-button:hover {
+  opacity: .8;
+  background: orange;
+  color: white;
+  border: white;
+}
+
+.orange-button:focus,.orange-button:active {
+  background: orange !important;
+  color: white !important;
+  border: white;
+  outline: none !important;
+  box-shadow: none;
+}
+
+.grey-button {
+  position: absolute;
+  background: grey;
+  color: white;
+  border: white;
+  padding: .5% 1% .5% 1%;
+  font-size: 20px;
+  font-weight: 300;
+  margin-left: 2%
+}
+
+.grey-button:hover {
+  opacity: .8;
+  background: grey;
+  color: white;
+  border: white;
+}
+
+.center-button {
+  display: block;
+  position: inherit;
+  margin: auto;
+}
+
+.grey-button:focus,.grey-button:active {
+  background: grey !important;
+  color: white !important;
+  border: white;
+  outline: none !important;
+  box-shadow: none;
+}
+
+ng4geo-autocomplete {
+  #search_places {
+    width: 80%;
+    margin: auto;
+    border-radius: 5px;
+    margin-top: 2% !important;
+  }
+
+  .search-icon {
+    display: none;
+  }
+
+  .custom-autocomplete__dropdown[_ngcontent-c4] {
+    position: static;
+    background: #fff;
+    margin: auto;
+    padding: 0;
+    width: 80%;
+    text-align: center;
+    list-style: none;
+    border: none;
+    z-index: 99;
+    top: 50px;
+  }
+
+  .custom-autocomplete__dropdown[_ngcontent-c4] {
+    .active[_ngcontent-c4] a[_ngcontent-c4] {
+      background-color: $hover-blue;
+    }
+
+    .heading[_ngcontent-c4] {
+      .line-location[_ngcontent-c4], .line-recent[_ngcontent-c4] {
+        display: none;
+      }
+    }
+
+    .currentlocation[_ngcontent-c4] .location-icon[_ngcontent-c4] {
+      display: none;
+    }
+  }
 }

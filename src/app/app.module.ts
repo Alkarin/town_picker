@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TownsComponent } from './towns/towns.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { MainComponent } from './main/main.component';
+import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MainComponent } from './main/main.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng4GeoautocompleteModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
