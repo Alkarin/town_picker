@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import {SearchService} from "./search.service";
+import {SearchService} from './search.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
   providers: [SearchService]
 })
 export class AppComponent {

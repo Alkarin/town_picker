@@ -1,9 +1,5 @@
-/*
-
-#AAFF00 - GREEN
-#4174C7 - BLUE
-
-*/
+$green: #AAFF00;
+$blue: #4174C7;
 
 html, body {
   height: 100%;
@@ -22,7 +18,7 @@ app-root {
 
 #navbar {
   overflow: hidden;
-  background: #4174C7;
+  background: $blue;
   display: flex;
 }
 
@@ -45,7 +41,7 @@ app-root {
 
 #navbar button {
   float: right;
-  background-color: #4174C7;
+  background-color: $blue;
   color: #FFF;
   margin: .8%;
   font-weight: 400;
@@ -56,7 +52,7 @@ app-root {
   float: right;
   margin: .8%;
   background-color: #FFF;
-  color: #4174C7;
+  color: $blue;
   font-weight: 400;
   border: 1px solid #FFFFFF;
 }
@@ -68,7 +64,7 @@ app-root {
 
 #footer {
   overflow: hidden;
-  background: #4174C7;
+  background: $blue;
   position: absolute;
   bottom: 0px;
   width: 100%;
@@ -142,7 +138,7 @@ app-root {
   width: 50%;
   font-size: 18px;
   padding: 5px;
-  border: 0px solid #4174C7;
+  border: 0px solid $blue;
   border-top: 0px;
 }
 
