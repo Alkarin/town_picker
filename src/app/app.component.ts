@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import {SearchService} from './search.service';
+import {AnimationDirection} from './models/animation-direction.enum';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,12 @@ export class AppComponent {
   resultValues: Object;
   searchTerm$ = new Subject<string>();
   currentYear = new Date().getFullYear();
+  currentPage: number;
+  animationDirection: AnimationDirection.NONE;
 
   constructor(private searchService: SearchService) {
+
+    this.currentPage = 1;
 
     this.searchService.search(this.searchTerm$).subscribe(
       (response) => this.handleResponse(response),
@@ -38,5 +43,29 @@ export class AppComponent {
 
   private handleResponseError(error) {
     console.log('ERROR:' + JSON.stringify(error));
+  }
+
+  toggleDisplay(pageNum) {
+    if (pageNum === this.currentPage) {
+      console.log(pageNum);
+      console.log(this.currentPage);
+      if (this.animationDirection === AnimationDirection.NONE) {
+        return 'show-page';
+      } else if (this.animationDirection === AnimationDirection.LEFT) {
+        return 'show-page animate-left';
+      } else if (this.animationDirection === AnimationDirection.RIGHT) {
+        return 'show-page animate-right';
+      } else {
+        // Return from finished page
+        return 'show-page animate-left';
+      }
+    } else {
+      return 'hide-page';
+    }
+  }
+
+  onNotify($event) {
+    this.currentPage = $event.currentPage;
+    this.animationDirection = $event.animationDirection;
   }
 }

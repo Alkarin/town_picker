@@ -3,15 +3,9 @@
 </div>
 
 <div class="container">
-  <h2 id="container-title">Seconday Header</h2>
-  <input id="search-bar" placeholder="Select a town" (keyup)="searchTerm$.next($event.target.value)">
-
-  <div id="search-results">
-    <div class="search-result" *ngFor="let key of results">
-      {{resultValues[key]}}
-    </div>
-  </div>
-
+  <app-main [ngClass]="toggleDisplay(1)"></app-main>
+  <app-towns [ngClass]="toggleDisplay(2)"></app-towns>
+  <app-navigation (notify)="onNotify($event)"></app-navigation>
 </div>
 
 <footer id="footer">

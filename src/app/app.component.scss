@@ -1,0 +1,39 @@
+.animate-right {
+  position:relative;
+  animation:animateRight 0.4s
+}
+
+@keyframes animateRight {
+  from {
+    right:-800px;
+    opacity:0
+  }
+  to {
+    right:0;
+    opacity:1
+  }
+}
+
+.animate-left{
+  position:relative;
+  animation:animateLeft 0.4s
+}
+
+@keyframes animateLeft {
+  from{
+    left:-800px;
+    opacity:0
+  }
+  to{
+    left:0;
+    opacity:1
+  }
+}
+
+.show-page {
+  display: block;
+}
+
+.hide-page {
+  display: none;
+}
