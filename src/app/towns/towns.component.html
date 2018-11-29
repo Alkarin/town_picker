@@ -7,15 +7,19 @@
   <h1 class="random-title"
       [ngClass]="checkRandomSelected()">Your Random City is...</h1>
   <div class="random-result"
-       [ngClass]="checkRandomSelected()">ree</div>
+       [ngClass]="checkRandomSelected()">{{getCurrentCity('cityName')}},{{getCurrentCity('cityState')}} {{getCurrentCity('timezoneOffset')}}
+  </div>
 
   <h2 class="title">Current Towns</h2>
   <div id="current-cities">
-    <div class="cities-results" *ngFor="let key of results">
-      {{resultValues[key]}}
+    <div class="city-results" *ngFor="let key of results">
+      <tr>
+        <th>{{resultValues[key].cityName}},</th>
+        <th>{{resultValues[key].cityState}}</th>
+        <th>{{getDateFromTimeZone(resultValues[key].timezoneOffset)}}</th>
+      </tr>
     </div>
   </div>
-
 
 </div>
 

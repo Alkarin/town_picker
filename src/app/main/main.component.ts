@@ -34,7 +34,6 @@ export class MainComponent implements OnInit {
     this.currentSelection.setLongitude(geometry.lng);
 
     // console.log(json);
-
     for (let prop in json) {
       // console.log('key: ' + prop);
       // console.log(json[prop].long_name);
@@ -79,18 +78,19 @@ export class MainComponent implements OnInit {
     );
   }
 
+  addCity() {
+    // @ts-ignore
+    this.apiService.addCity(this.currentSelection).subscribe(
+      (response) => this.handleSuccess(response),
+      (error) => this.handleFailure(error)
+    );
+  }
+
   handleTimeZoneSuccess(response) {
     // Calculate Offset
     let offset = (response.rawOffset / 60 / 60);
     this.currentSelection.setTimeZoneOffset(offset);
     this.addCity();
-  }
-
-  addCity() {
-    this.apiService.addCity(this.currentSelection).subscribe(
-      (response) => this.handleSuccess(response),
-      (error) => this.handleFailure(error)
-    );
   }
 
   private handleSuccess(response) {

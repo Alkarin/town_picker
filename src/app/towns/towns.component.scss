@@ -7,3 +7,24 @@
   margin: auto;
   text-align: center;
 }
+
+.city-results {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+#current-cities {
+  overflow-y: scroll;
+  height: 300px;
+  margin-right: -50px;
+  padding-right: 50px;
+}
+
+tbody {
+  display: inline;
+}
+
+th {
+  padding: 5px;
+}

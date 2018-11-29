@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 import {ApiService} from './api.service';
 import {AnimationDirection} from './models/animation-direction.enum';
 

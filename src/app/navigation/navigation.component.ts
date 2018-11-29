@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {AnimationDirection} from '../models/animation-direction.enum';
+import {TownsService} from '../towns.service';
 
 @Component({
   selector: 'app-navigation',
@@ -14,7 +15,7 @@ export class NavigationComponent implements OnInit {
   hideNextButton: boolean;
   animationDirection: AnimationDirection;
 
-  constructor() {
+  constructor(private townsService: TownsService) {
     this.hidePrevButton = true;
     this.hideNextButton = false;
   }
@@ -32,12 +33,19 @@ export class NavigationComponent implements OnInit {
     this.animationDirection = AnimationDirection.RIGHT;
   }
 
+  onActivate() {
+    // OBSERVABLE
+    this.townsService.activated.next();
+  }
+
   navNext() {
     // Increment by 1
     this.currentPage++;
     this.animateRight();
     this.notify.emit({currentPage: this.currentPage, animationDirection: this.animationDirection});
     this.manageButtons(this.currentPage);
+
+    this.onActivate();
   }
 
   navPrev() {

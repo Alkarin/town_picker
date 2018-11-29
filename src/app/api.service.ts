@@ -13,27 +13,21 @@ export class ApiService {
   constructor(private httpClient: HttpClient) { }
 
   getCities() {
-    return this.httpClient.get(this.serverUrl + '/cities.php' , {responseType: 'text'});
+    console.log('getting cities');
+    return this.httpClient.get(this.serverUrl + '/cities.php');
   }
 
   getRandomCity() {
-    // ADD responseType 'text' to fix bug
-    // https://github.com/angular/angular/issues/18396#issuecomment-337137624
-    return this.httpClient.get(this.serverUrl + '/randomCity.php', {responseType: 'text'});
+    return this.httpClient.get(this.serverUrl + '/randomCity.php');
   }
 
-  // getTimeZoneOffSet() {
-  //   return this.httpClient.get(this.serverUrl + '/getOffset.php' , {responseType: 'text'});
-  // }
-
   addCity(data: any[]) {
-    console.log('sending');
-    console.log(data);
     return this.httpClient.post(this.serverUrl + '/addCity.php', data, {responseType: 'text'});
   }
 
   getGoogleMapsTimeZone(latitude, longitude) {
     // CALL TO GOOGLE MAPS API
-    return this.httpClient.get(this.googleMapsApiUrl + latitude.toString() + ',' + longitude.toString() + '&timestamp=1458000000&key=' + this.googleMapsApiKey);
+    return this.httpClient.get(this.googleMapsApiUrl + latitude.toString()
+      + ',' + longitude.toString() + '&timestamp=1458000000&key=' + this.googleMapsApiKey);
   }
 }
