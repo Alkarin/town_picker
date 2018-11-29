@@ -11,6 +11,7 @@ import {City} from '../models/city';
 export class TownsComponent implements OnInit {
   randomSelected: boolean;
   currentRandom = new City();
+  showRandom: boolean;
   results: Object;
   resultValues: Object;
 
@@ -41,6 +42,14 @@ export class TownsComponent implements OnInit {
     );
 
     this.randomSelected = true;
+  }
+
+  showRandomButton() {
+    if (this.showRandom) {
+       return 'show-page';
+    } else {
+      return 'hide-page';
+    }
   }
 
   getCurrentCity(param) {
@@ -83,6 +92,14 @@ export class TownsComponent implements OnInit {
     } else {
       this.results = Object.keys(response);
       this.resultValues = Object.values(response);
+
+      // INITIALIZE showRandom
+      if (this.results.length >= 3) {
+        this.showRandom = true;
+      } else {
+        this.showRandom = false;
+      }
+
     }
   }
 

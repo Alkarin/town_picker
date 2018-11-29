@@ -124,11 +124,11 @@ app-navigation {
 }
 
 .show-page {
-  display: block;
+  display: block !important;
 }
 
 .hide-page {
-  display: none;
+  display: none !important;
 }
 
 .error, .success {
