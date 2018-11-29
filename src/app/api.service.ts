@@ -13,7 +13,7 @@ export class ApiService {
   constructor(private httpClient: HttpClient) { }
 
   getCities() {
-    console.log('getting cities');
+    // console.log('getting cities');
     return this.httpClient.get(this.serverUrl + '/cities.php');
   }
 

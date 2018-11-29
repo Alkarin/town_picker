@@ -19,8 +19,6 @@ export class MainComponent implements OnInit {
 
   autoCompleteCallback1(selectedData: any) {
     // Do things!
-    console.log(selectedData);
-
     this.parseResponse(selectedData);
   }
 
@@ -33,16 +31,18 @@ export class MainComponent implements OnInit {
     this.currentSelection.setLatitude(geometry.lat);
     this.currentSelection.setLongitude(geometry.lng);
 
-    console.log(json);
+    // console.log(json);
     for (let prop in json) {
       // console.log('key: ' + prop);
       // console.log(json[prop].long_name);
       let types = json[prop].types;
       for (let type in types) {
-        console.log(json[prop].types[type]);
+        // console.log(json[prop].types[type]);
 
-        if (json[prop].types[type] === 'locality') {
-          break;
+        if (json[prop].types[type] === 'country') {
+          if (json[prop].long_name === 'United States') {
+            this.currentValidation.setHasCountry(true);
+          }
         }
 
         // Check for city value
@@ -58,12 +58,12 @@ export class MainComponent implements OnInit {
         }
       }
     }
-    console.log(this.currentSelection);
     this.validateResponse(this.currentValidation);
   }
 
   validateResponse (currentValidation) {
-    if (currentValidation.hasLocality && currentValidation.hasState) {
+    console.log(this.currentSelection);
+    if (currentValidation.hasLocality && currentValidation.hasState && currentValidation.hasCountry) {
       currentValidation.setIsValid(true);
       console.log('valid!');
     } else {

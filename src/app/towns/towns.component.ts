@@ -71,8 +71,8 @@ export class TownsComponent implements OnInit {
   }
 
   private handleCitiesSuccess(response) {
-    console.log('handling cities');
-    console.log(response);
+    // console.log('handling cities');
+    // console.log(response);
 
     if (JSON.stringify(response) === '\"No Results\"') {
       console.log('There were no results');
@@ -81,12 +81,8 @@ export class TownsComponent implements OnInit {
       this.results = null;
       this.resultValues = null;
     } else {
-      // console.log('Response: ' + JSON.stringify(response));
       this.results = Object.keys(response);
       this.resultValues = Object.values(response);
-      console.log('results:');
-      console.log(this.results);
-      console.log(this.resultValues);
     }
   }
 
@@ -97,9 +93,8 @@ export class TownsComponent implements OnInit {
 
   private handleRandomizeSuccess(response) {
     this.currentRandom.setCityName(response.cityName);
-    this.currentRandom.setCityName(response.cityState);
+    this.currentRandom.setCityState(response.cityState);
     this.currentRandom.setTimeZoneOffset(response.timezoneOffset);
-    console.log(response);
   }
 
   private handleRandomizeFailure(error) {

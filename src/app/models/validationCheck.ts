@@ -1,5 +1,6 @@
 export class ValidationCheck {
   isValid: boolean;
+  hasCountry: boolean;
   hasLocality: boolean;
   hasState: boolean;
   hasTimeZone: boolean;
@@ -24,6 +25,10 @@ export class ValidationCheck {
 
   setHasTimeZone (hasTimeZone) {
     this.hasTimeZone = hasTimeZone;
+  }
+
+  setHasCountry (hasCountry) {
+    this.hasCountry = hasCountry;
   }
 
 }
