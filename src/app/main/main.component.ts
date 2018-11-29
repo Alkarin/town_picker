@@ -33,13 +33,17 @@ export class MainComponent implements OnInit {
     this.currentSelection.setLatitude(geometry.lat);
     this.currentSelection.setLongitude(geometry.lng);
 
-    // console.log(json);
+    console.log(json);
     for (let prop in json) {
       // console.log('key: ' + prop);
       // console.log(json[prop].long_name);
       let types = json[prop].types;
       for (let type in types) {
-        // console.log(json[prop].types[type]);
+        console.log(json[prop].types[type]);
+
+        if (json[prop].types[type] === 'locality') {
+          break;
+        }
 
         // Check for city value
         if (json[prop].types[type] === 'locality') {
@@ -88,9 +92,12 @@ export class MainComponent implements OnInit {
 
   handleTimeZoneSuccess(response) {
     // Calculate Offset
-    let offset = (response.rawOffset / 60 / 60);
-    this.currentSelection.setTimeZoneOffset(offset);
-    this.addCity();
+    if (this.currentValidation.isValid) {
+      let offset = (response.rawOffset / 60 / 60);
+      this.currentSelection.setTimeZoneOffset(offset);
+      this.addCity();
+    }
+    console.log('Failure: City is not valid');
   }
 
   private handleSuccess(response) {
