@@ -26,8 +26,10 @@ export class ApiService {
   //   return this.httpClient.get(this.serverUrl + '/getOffset.php' , {responseType: 'text'});
   // }
 
-  addCity(data) {
-    return this.httpClient.post(this.serverUrl + '/addCity.php/?data=', data, {responseType: 'text'});
+  addCity(data: any[]) {
+    console.log('sending');
+    console.log(data);
+    return this.httpClient.post(this.serverUrl + '/addCity.php', data, {responseType: 'text'});
   }
 
   getGoogleMapsTimeZone(latitude, longitude) {

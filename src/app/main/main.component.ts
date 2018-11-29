@@ -60,7 +60,7 @@ export class MainComponent implements OnInit {
   }
 
   validateResponse (currentValidation) {
-    if (currentValidation.hasLocality || currentValidation.hasState) {
+    if (currentValidation.hasLocality && currentValidation.hasState) {
       currentValidation.setIsValid(true);
       console.log('valid!');
     } else {
@@ -70,22 +70,7 @@ export class MainComponent implements OnInit {
   }
 
   submitInput() {
-    // GET TIMEZONE OFFSET
-    this.getTimeZoneOffset();
-    console.log('submitting');
-    console.log(this.currentSelection);
-
-    this.apiService.addCity(this.currentSelection).subscribe(
-      (response) => this.handleSuccess(response),
-      (error) => this.handleFailure(error)
-    );
-
-    // SPOOF CODE
-    // this.currentValidation = new ValidationCheck();
-    // this.currentValidation.setIsValid(true);
-  }
-
-  getTimeZoneOffset() {
+    // GET TIMEZONE OFFSET OF INPUT
     this.apiService.getGoogleMapsTimeZone(this.currentSelection.latitude, this.currentSelection.longitude).subscribe(
       (response) => this.handleTimeZoneSuccess(response),
       (error) => function () {
@@ -95,26 +80,21 @@ export class MainComponent implements OnInit {
   }
 
   handleTimeZoneSuccess(response) {
-    console.log('success timezone');
-    console.log(response);
-    console.log((response.rawOffset / 60 / 60));
-    let offset = (response.rawOffset / 60 / 60);
-    console.log('passing offset');
-    console.log(offset);
     // Calculate Offset
+    let offset = (response.rawOffset / 60 / 60);
     this.currentSelection.setTimeZoneOffset(offset);
+    this.addCity();
   }
 
-  getDateFromTimeZone(offset) {
-    console.log(offset);
-    let currentDate = new Date();
-    console.log('current Date: ' + currentDate);
-    let offsetDate = new Date( new Date().getTime() + offset * 3600 * 1000).toUTCString().replace( / GMT$/, '' );
-    console.log(offsetDate);
-    return offsetDate;
+  addCity() {
+    this.apiService.addCity(this.currentSelection).subscribe(
+      (response) => this.handleSuccess(response),
+      (error) => this.handleFailure(error)
+    );
   }
 
   private handleSuccess(response) {
+    this.currentValidation.setHasTimeZone(true);
     console.log(response);
   }
 
@@ -135,9 +115,9 @@ export class MainComponent implements OnInit {
   }
 
   checkSuccessValidation () {
-    // @TODO only display as success upon successful api call response
     try {
-      if (this.currentValidation.isValid) {
+      if (this.currentValidation.isValid && this.currentValidation.hasTimeZone) {
+        // @TODO revert back to 'hide-page' after a few seconds
         return 'show-page';
       } else {
         return 'hide-page';

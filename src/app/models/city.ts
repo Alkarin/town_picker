@@ -24,8 +24,6 @@ export class City {
   }
 
   setTimeZoneOffset(timezoneOffset) {
-    console.log('setting offset');
-    console.log(timezoneOffset);
     this.timezoneOffset = timezoneOffset;
   }
 }

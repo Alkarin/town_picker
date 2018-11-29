@@ -31,6 +31,15 @@ export class TownsComponent implements OnInit {
     this.randomSelected = true;
   }
 
+  getDateFromTimeZone(offset) {
+    console.log(offset);
+    let currentDate = new Date();
+    console.log('current Date: ' + currentDate);
+    let offsetDate = new Date( new Date().getTime() + offset * 3600 * 1000).toUTCString().replace( / GMT$/, '' );
+    console.log(offsetDate);
+    return offsetDate;
+  }
+
   private handleCitiesSuccess(response) {
     console.log(response);
 
