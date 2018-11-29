@@ -94,6 +94,7 @@ export class TownsComponent implements OnInit {
       this.resultValues = Object.values(response);
 
       // INITIALIZE showRandom
+      // @ts-ignore
       if (this.results.length >= 3) {
         this.showRandom = true;
       } else {
