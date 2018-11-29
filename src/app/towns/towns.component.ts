@@ -7,9 +7,16 @@ import {ApiService} from '../api.service';
   styleUrls: ['./towns.component.scss']
 })
 export class TownsComponent implements OnInit {
-  randomSelected: boolean
+  randomSelected: boolean;
+  results: Object;
+  resultValues: Object;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {
+    this.apiService.getCities().subscribe(
+      (response) => this.handleCitiesSuccess(response),
+      (error) => this.handleCitiesizeFailure(error)
+    );
+  }
 
   ngOnInit() {
   }
@@ -17,18 +24,38 @@ export class TownsComponent implements OnInit {
   randomize() {
     // Do Stuff
     this.apiService.getRandomCity().subscribe(
-      (response) => this.handleSuccess(response),
-      (error) => this.handleFailure(error)
+      (response) => this.handleRandomizeSuccess(response),
+      (error) => this.handleRandomizeFailure(error)
     );
 
     this.randomSelected = true;
   }
 
-  private handleSuccess(response) {
+  private handleCitiesSuccess(response) {
+    console.log(response);
+
+    if (JSON.stringify(response) === '\"No Results\"') {
+      // console.log("There were no results");
+
+      // Clear Search Results
+      this.results = null;
+      this.resultValues = null;
+    } else {
+      // console.log("RESPONSE:" + JSON.stringify(response));
+      this.results = Object.keys(response);
+      this.resultValues = Object.values(response);
+    }
+  }
+
+  private handleCitiesizeFailure(error) {
+    console.log(error);
+  }
+
+  private handleRandomizeSuccess(response) {
     console.log(response);
   }
 
-  private handleFailure(error) {
+  private handleRandomizeFailure(error) {
     console.log(error);
   }
 

@@ -10,6 +10,11 @@
        [ngClass]="checkRandomSelected()">ree</div>
 
   <h2 class="title">Current Towns</h2>
+  <div id="current-cities">
+    <div class="cities-results" *ngFor="let key of results">
+      {{resultValues[key]}}
+    </div>
+  </div>
 
 
 </div>

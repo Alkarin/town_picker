@@ -3,6 +3,7 @@ export class City {
   cityState: String;
   latitude: number;
   longitude: number;
+  timezoneOffset: number;
 
   constructor () {}
 
@@ -20,5 +21,11 @@ export class City {
 
   setLongitude(longitude) {
     this.longitude = longitude;
+  }
+
+  setTimeZoneOffset(timezoneOffset) {
+    console.log('setting offset');
+    console.log(timezoneOffset);
+    this.timezoneOffset = timezoneOffset;
   }
 }

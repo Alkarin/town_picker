@@ -33,14 +33,14 @@ export class MainComponent implements OnInit {
     this.currentSelection.setLatitude(geometry.lat);
     this.currentSelection.setLongitude(geometry.lng);
 
-    console.log(json);
+    // console.log(json);
 
     for (let prop in json) {
-      console.log('key: ' + prop);
-      console.log(json[prop].long_name);
+      // console.log('key: ' + prop);
+      // console.log(json[prop].long_name);
       let types = json[prop].types;
       for (let type in types) {
-        console.log(json[prop].types[type]);
+        // console.log(json[prop].types[type]);
 
         // Check for city value
         if (json[prop].types[type] === 'locality') {
@@ -70,16 +70,48 @@ export class MainComponent implements OnInit {
   }
 
   submitInput() {
-    // ALSO NEED TO PARSE TIMEZONE
-    // https://developers.google.com/maps/documentation/timezone/start
+    // GET TIMEZONE OFFSET
+    this.getTimeZoneOffset();
+    console.log('submitting');
+    console.log(this.currentSelection);
+
     this.apiService.addCity(this.currentSelection).subscribe(
       (response) => this.handleSuccess(response),
       (error) => this.handleFailure(error)
     );
 
     // SPOOF CODE
-    this.currentValidation = new ValidationCheck();
-    this.currentValidation.setIsValid(true);
+    // this.currentValidation = new ValidationCheck();
+    // this.currentValidation.setIsValid(true);
+  }
+
+  getTimeZoneOffset() {
+    this.apiService.getGoogleMapsTimeZone(this.currentSelection.latitude, this.currentSelection.longitude).subscribe(
+      (response) => this.handleTimeZoneSuccess(response),
+      (error) => function () {
+        console.log(error);
+      }
+    );
+  }
+
+  handleTimeZoneSuccess(response) {
+    console.log('success timezone');
+    console.log(response);
+    console.log((response.rawOffset / 60 / 60));
+    let offset = (response.rawOffset / 60 / 60);
+    console.log('passing offset');
+    console.log(offset);
+    // Calculate Offset
+    this.currentSelection.setTimeZoneOffset(offset);
+  }
+
+  getDateFromTimeZone(offset) {
+    console.log(offset);
+    let currentDate = new Date();
+    console.log('current Date: ' + currentDate);
+    let offsetDate = new Date( new Date().getTime() + offset * 3600 * 1000).toUTCString().replace( / GMT$/, '' );
+    console.log(offsetDate);
+    return offsetDate;
   }
 
   private handleSuccess(response) {
