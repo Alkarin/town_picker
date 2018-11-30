@@ -11,10 +11,12 @@ import {Town} from '../models/town';
 export class MainComponent implements OnInit {
   currentValidation: ValidationCheck;
   currentSelection: Town;
+  apiResponseError: boolean;
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
+    this.apiResponseError = false;
   }
 
   autoCompleteCallback1(selectedData: any) {
@@ -33,8 +35,6 @@ export class MainComponent implements OnInit {
 
     // console.log(json);
     for (let prop in json) {
-      // console.log('key: ' + prop);
-      // console.log(json[prop].long_name);
       let types = json[prop].types;
       for (let type in types) {
         // console.log(json[prop].types[type]);
@@ -102,11 +102,21 @@ export class MainComponent implements OnInit {
   }
 
   private handleSuccess(response) {
+    this.apiResponseError = false;
     console.log(response);
   }
 
   private handleFailure(error) {
+    this.apiResponseError = true;
     console.log(error);
+  }
+
+  showApiError () {
+    if(this.apiResponseError){
+      return 'show-page';
+    } else {
+      return 'hide-page';
+    }
   }
 
   checkErrorValidation () {
@@ -123,7 +133,7 @@ export class MainComponent implements OnInit {
 
   checkSuccessValidation () {
     try {
-      if (this.currentValidation.isValid && this.currentValidation.hasTimeZone) {
+      if (this.currentValidation.isValid && this.currentValidation.hasTimeZone && !this.apiResponseError) {
         // @TODO revert back to 'hide-page' after a few seconds
         return 'show-page';
       } else {

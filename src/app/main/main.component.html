@@ -6,6 +6,11 @@
   </button>
 
   <div class="error alert alert-danger"
+       [ngClass]="showApiError()">
+    Could not add Town. Please try again later.
+  </div>
+
+  <div class="error alert alert-danger"
        [ngClass]="checkErrorValidation()">
     Please select a location defined by a Town and State
   </div>
