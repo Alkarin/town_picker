@@ -134,7 +134,22 @@ app-navigation {
   display: none !important;
 }
 
+.fade-show {
+  opacity: 1 !important;
+}
+
+.fade-hide {
+  opacity: 0;
+  transition: .5s ease-in-out all;
+}
+
+#alert-container {
+  height: 70px;
+}
+
 .error, .success {
+  position: absolute;
+  left: 30%;
   width: 40%;
   margin: auto;
   text-align: center;
@@ -280,3 +295,18 @@ ng4geo-autocomplete {
     }
   }
 }
+
+@media screen and (max-width: 1355px) {
+  #alert-container {
+    font-size: 14px;
+    padding-bottom: 7%;
+  }
+}
+
+@media screen and (max-width: 1210px) {
+  #alert-container {
+    font-size: 12px;
+    padding-bottom: 10%;
+  }
+}
+

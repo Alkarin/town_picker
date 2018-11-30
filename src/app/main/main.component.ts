@@ -113,34 +113,33 @@ export class MainComponent implements OnInit {
 
   showApiError () {
     if(this.apiResponseError){
-      return 'show-page';
+      return 'fade-show';
     } else {
-      return 'hide-page';
+      return 'fade-hide';
     }
   }
 
   checkErrorValidation () {
     try {
       if (this.currentValidation.isValid) {
-        return 'hide-page';
+        return 'fade-hide';
       } else {
-        return 'show-page';
+        return 'fade-show';
       }
     } catch (e) {
-      return 'hide-page';
+      return 'fade-hide';
     }
   }
 
   checkSuccessValidation () {
     try {
       if (this.currentValidation.isValid && this.currentValidation.hasTimeZone && !this.apiResponseError) {
-        // @TODO revert back to 'hide-page' after a few seconds
-        return 'show-page';
+        return 'fade-show';
       } else {
-        return 'hide-page';
+        return 'fade-hide';
       }
     } catch (e) {
-      return 'hide-page';
+      return 'fade-hide';
     }
   }
 }
