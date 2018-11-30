@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
+import {Town} from "./models/town";
 
 @Injectable()
 export class ApiService {
@@ -12,17 +13,16 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getCities() {
-    // console.log('getting cities');
-    return this.httpClient.get(this.serverUrl + '/cities.php');
+  getTowns() {
+    return this.httpClient.get(this.serverUrl + '/towns.php');
   }
 
-  getRandomCity() {
-    return this.httpClient.get(this.serverUrl + '/randomCity.php');
+  getRandomTown() {
+    return this.httpClient.get(this.serverUrl + '/randomTown.php');
   }
 
-  addCity(data: any[]) {
-    return this.httpClient.post(this.serverUrl + '/addCity.php', data, {responseType: 'text'});
+  addTown(data: Town) {
+    return this.httpClient.post(this.serverUrl + '/addTown.php', data, {responseType: 'text'});
   }
 
   getGoogleMapsTimeZone(latitude, longitude) {

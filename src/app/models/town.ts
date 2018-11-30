@@ -1,18 +1,18 @@
-export class City {
-  cityName: String;
-  cityState: String;
+export class Town {
+  townName: String;
+  townState: String;
   latitude: number;
   longitude: number;
   timezoneOffset: number;
 
   constructor () {}
 
-  setCityName(cityName) {
-    this.cityName = cityName;
+  setTownName(townName) {
+    this.townName = townName;
   }
 
-  setCityState(cityState) {
-    this.cityState = cityState;
+  setTownState(townState) {
+    this.townState = townState;
   }
 
   setLatitude (latitude) {

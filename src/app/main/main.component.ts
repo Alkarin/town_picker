@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ValidationCheck} from '../models/validationCheck';
 import {ApiService} from '../api.service';
-import {City} from '../models/city';
+import {Town} from '../models/town';
 
 @Component({
   selector: 'app-main',
@@ -10,7 +10,7 @@ import {City} from '../models/city';
 })
 export class MainComponent implements OnInit {
   currentValidation: ValidationCheck;
-  currentSelection: City;
+  currentSelection: Town;
 
   constructor(private apiService: ApiService) { }
 
@@ -22,9 +22,9 @@ export class MainComponent implements OnInit {
     this.parseResponse(selectedData);
   }
 
-  parseResponse (selectedData) {
+  private parseResponse (selectedData) {
     this.currentValidation = new ValidationCheck();
-    this.currentSelection = new City();
+    this.currentSelection = new Town();
 
     let json = selectedData.data.address_components;
     let geometry = selectedData.data.geometry.location;
@@ -48,20 +48,20 @@ export class MainComponent implements OnInit {
         // Check for city value
         if (json[prop].types[type] === 'locality') {
           this.currentValidation.setHasLocality(true);
-          this.currentSelection.setCityName(json[prop].long_name);
+          this.currentSelection.setTownName(json[prop].long_name);
         }
 
         // Check for state value
         if (json[prop].types[type] === 'administrative_area_level_1') {
           this.currentValidation.setHasState(true);
-          this.currentSelection.setCityState(json[prop].long_name);
+          this.currentSelection.setTownState(json[prop].long_name);
         }
       }
     }
     this.validateResponse(this.currentValidation);
   }
 
-  validateResponse (currentValidation) {
+  private validateResponse (currentValidation) {
     console.log(this.currentSelection);
     if (currentValidation.hasLocality && currentValidation.hasState && currentValidation.hasCountry) {
       currentValidation.setIsValid(true);
@@ -82,26 +82,26 @@ export class MainComponent implements OnInit {
     );
   }
 
-  addCity() {
-    // @ts-ignore
-    this.apiService.addCity(this.currentSelection).subscribe(
+  private handleTimeZoneSuccess(response) {
+    // Calculate Offset
+    if (this.currentValidation.isValid) {
+      let offset = (response.rawOffset / 60 / 60);
+      this.currentSelection.setTimeZoneOffset(offset);
+      this.currentValidation.setHasTimeZone(true);
+      this.addTown();
+    } else {
+      console.log('Failure: Town is not valid');
+    }
+  }
+
+  private addTown() {
+    this.apiService.addTown(this.currentSelection).subscribe(
       (response) => this.handleSuccess(response),
       (error) => this.handleFailure(error)
     );
   }
 
-  handleTimeZoneSuccess(response) {
-    // Calculate Offset
-    if (this.currentValidation.isValid) {
-      let offset = (response.rawOffset / 60 / 60);
-      this.currentSelection.setTimeZoneOffset(offset);
-      this.addCity();
-    }
-    console.log('Failure: City is not valid');
-  }
-
   private handleSuccess(response) {
-    this.currentValidation.setHasTimeZone(true);
     console.log(response);
   }
 
@@ -109,7 +109,7 @@ export class MainComponent implements OnInit {
     console.log(error);
   }
 
-  checkValidation () {
+  checkErrorValidation () {
     try {
       if (this.currentValidation.isValid) {
         return 'hide-page';
@@ -133,5 +133,4 @@ export class MainComponent implements OnInit {
       return 'hide-page';
     }
   }
-
 }

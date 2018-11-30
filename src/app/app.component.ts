@@ -9,32 +9,12 @@ import {AnimationDirection} from './models/animation-direction.enum';
   providers: [ApiService]
 })
 export class AppComponent {
-  results: Object;
-  resultValues: Object;
   currentYear = new Date().getFullYear();
   currentPage: number;
   animationDirection: AnimationDirection.NONE;
 
   constructor() {
     this.currentPage = 1;
-  }
-
-  private handleResponse(response) {
-    if (JSON.stringify(response) === '\"No Results\"') {
-      // console.log("There were no results");
-
-      // Clear Search Results
-      this.results = null;
-      this.resultValues = null;
-    } else {
-      // console.log("RESPONSE:" + JSON.stringify(response));
-      this.results = Object.keys(response);
-      this.resultValues = Object.values(response);
-    }
-  }
-
-  private handleResponseError(error) {
-    console.log('ERROR:' + JSON.stringify(error));
   }
 
   toggleDisplay(pageNum) {

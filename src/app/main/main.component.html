@@ -1,13 +1,13 @@
 <div class="col-md-12">
-  <h2 class="title">Find any address, and add the city to the list</h2>
+  <h2 class="title">Find any address, and add the town to the list</h2>
 
-  <button class="add-city btn btn-default grey-button center-button"
-          (click)="submitInput()">Add Current City
+  <button class="add-town btn btn-default grey-button center-button"
+          (click)="submitInput()">Add Current Town
   </button>
 
   <div class="error alert alert-danger"
-       [ngClass]="checkValidation()">
-    Please select a location defined by a City and State
+       [ngClass]="checkErrorValidation()">
+    Please select a location defined by a Town and State
   </div>
 
   <div class="success alert alert-success"

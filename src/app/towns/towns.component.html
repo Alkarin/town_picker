@@ -1,6 +1,5 @@
 <div class="col-md-12">
-
-  <h2 class="title" [ngClass]="showRandomButton()">Click The Button for a random city!</h2>
+  <h2 class="title" [ngClass]="showRandomButton()">Click The Button for a random Town!</h2>
 
   <button class="randomize btn btn-default orange-button center-button"
           [ngClass]="showRandomButton()"
@@ -8,21 +7,20 @@
   </button>
 
   <h1 class="random-title"
-      [ngClass]="checkRandomSelected()">Your Random City is...</h1>
+      [ngClass]="checkRandomSelected()">Your Random Town is...</h1>
   <div class="random-result"
-       [ngClass]="checkRandomSelected()">{{getCurrentCity('cityName')}}, {{getCurrentCity('cityState')}} {{getCurrentCity('timezoneOffset')}}
+       [ngClass]="checkRandomSelected()">{{getCurrentTown('townName')}}, {{getCurrentTown('townState')}} {{getCurrentTown('timezoneOffset')}}
   </div>
 
   <h2 class="title">Current Towns</h2>
-  <div id="current-cities">
-    <div class="city-results" *ngFor="let key of results">
+  <div id="current-towns">
+    <div class="town-results" *ngFor="let key of results">
       <tr>
-        <th>{{resultValues[key].cityName}},</th>
-        <th>{{resultValues[key].cityState}}</th>
+        <th>{{resultValues[key].townName}},</th>
+        <th>{{resultValues[key].townState}}</th>
         <th>{{getDateFromTimeZone(resultValues[key].timezoneOffset)}}</th>
       </tr>
     </div>
   </div>
-
 </div>
 

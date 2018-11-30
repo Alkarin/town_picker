@@ -1,3 +1,6 @@
+$white: #FFFFFF;
+$light-grey: #F2F2F2;
+$orange: #FFA500;
 $blue: #4174C7;
 $hover-blue: rgba(65, 116, 199, 0.15);
 
@@ -7,7 +10,7 @@ html, body {
 }
 
 body {
-  background-color: #f2f2f2;
+  background-color: $light-grey;
   font-family: lato;
 }
 
@@ -49,19 +52,19 @@ app-navigation {
 #navbar button {
   float: right;
   background-color: $blue;
-  color: #FFF;
+  color: $white;
   margin: .8%;
   font-weight: 400;
-  border: 1px solid #FFFFFF;
+  border: 1px solid $white;
 }
 
 #navbar button:hover {
   float: right;
   margin: .8%;
-  background-color: #FFF;
+  background-color: $white;
   color: $blue;
   font-weight: 400;
-  border: 1px solid #FFFFFF;
+  border: 1px solid $white;
 }
 
 .nav-content {
@@ -89,7 +92,7 @@ app-navigation {
   width: 75%;
   margin: auto;
   margin-bottom: 5%;
-  background-color: #FFF;
+  background-color: $white;
   box-shadow: 6px 6px 20px -10px #888888;
   height: 100%;
   padding: 0px;
@@ -143,7 +146,7 @@ app-navigation {
   margin-top: 2% !important;
 }
 
-.add-city {
+.add-town {
   margin: auto;
   margin-top: 2% !important;
   margin-bottom: 2%;
@@ -167,7 +170,7 @@ app-navigation {
 }
 
 .search-result:hover {
-  background-image: radial-gradient(circle, rgba(65, 116, 199, 0.12) 5%, #FFFFFF 60%);
+  background-image: radial-gradient(circle, rgba(65, 116, 199, 0.12) 5%, $white 60%);
   cursor: pointer;
 }
 
@@ -180,9 +183,9 @@ app-navigation {
 .orange-button {
   position: absolute;
   right: 0;
-  background: orange;
-  color: white;
-  border: white;
+  background: $orange;
+  color: $white;
+  border: $white;
   padding: .5% 1% .5% 1%;
   font-size: 20px;
   font-weight: 300;
@@ -191,13 +194,13 @@ app-navigation {
 
 .orange-button:hover {
   opacity: .8;
-  background: orange;
+  background: $orange;
   color: white;
   border: white;
 }
 
 .orange-button:focus,.orange-button:active {
-  background: orange !important;
+  background: $orange !important;
   color: white !important;
   border: white;
   outline: none !important;
@@ -207,8 +210,8 @@ app-navigation {
 .grey-button {
   position: absolute;
   background: grey;
-  color: white;
-  border: white;
+  color: $white;
+  border: $white;
   padding: .5% 1% .5% 1%;
   font-size: 20px;
   font-weight: 300;
@@ -218,8 +221,8 @@ app-navigation {
 .grey-button:hover {
   opacity: .8;
   background: grey;
-  color: white;
-  border: white;
+  color: $white;
+  border: $white;
 }
 
 .center-button {
@@ -230,8 +233,8 @@ app-navigation {
 
 .grey-button:focus,.grey-button:active {
   background: grey !important;
-  color: white !important;
-  border: white;
+  color: $white !important;
+  border: $white;
   outline: none !important;
   box-shadow: none;
 }
@@ -250,7 +253,7 @@ ng4geo-autocomplete {
 
   .custom-autocomplete__dropdown[_ngcontent-c4] {
     position: static;
-    background: #fff;
+    background: $white;
     margin: auto;
     padding: 0;
     width: 80%;

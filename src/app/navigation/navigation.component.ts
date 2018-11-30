@@ -25,15 +25,15 @@ export class NavigationComponent implements OnInit {
     this.manageButtons(this.currentPage);
   }
 
-  animateLeft() {
+  private animateLeft() {
     this.animationDirection = AnimationDirection.LEFT;
   }
 
-  animateRight() {
+  private animateRight() {
     this.animationDirection = AnimationDirection.RIGHT;
   }
 
-  onActivate() {
+  private onActivate() {
     // OBSERVABLE
     this.townsService.activated.next();
   }
@@ -56,7 +56,7 @@ export class NavigationComponent implements OnInit {
     this.manageButtons(this.currentPage);
   }
 
-  manageButtons(value) {
+  private manageButtons(value) {
     if (value === 1) {
       // On first page
       this.hidePrevButton = true;

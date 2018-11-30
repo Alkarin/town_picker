@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../api.service';
 import {TownsService} from '../towns.service';
-import {City} from '../models/city';
+import {Town} from '../models/town';
 
 @Component({
   selector: 'app-towns',
@@ -10,37 +10,31 @@ import {City} from '../models/city';
 })
 export class TownsComponent implements OnInit {
   randomSelected: boolean;
-  currentRandom = new City();
+  currentRandom = new Town();
   showRandom: boolean;
   results: Object;
   resultValues: Object;
 
   constructor(private apiService: ApiService, private townsService: TownsService) {
-    this.apiService.getCities().subscribe(
-      (response) => this.handleCitiesSuccess(response),
-      (error) => this.handleCitiesizeFailure(error)
-    );
   }
 
   ngOnInit() {
     this.townsService.activated.subscribe(
       (id: number) => {
         console.log('Observable activated in towns');
-        this.apiService.getCities().subscribe(
-          (response) => this.handleCitiesSuccess(response),
-          (error) => this.handleCitiesizeFailure(error)
+        this.apiService.getTowns().subscribe(
+          (response) => this.handleTownsSuccess(response),
+          (error) => this.handleTownsFailure(error)
         );
       }
     );
   }
 
   randomize() {
-    // Do Stuff
-    this.apiService.getRandomCity().subscribe(
+    this.apiService.getRandomTown().subscribe(
       (response) => this.handleRandomizeSuccess(response),
       (error) => this.handleRandomizeFailure(error)
     );
-
     this.randomSelected = true;
   }
 
@@ -52,16 +46,16 @@ export class TownsComponent implements OnInit {
     }
   }
 
-  getCurrentCity(param) {
+  getCurrentTown(param) {
     if (this.currentRandom === null) {
       return '';
     } else {
       switch (param) {
-        case 'cityName': {
-          return this.currentRandom.cityName;
+        case 'townName': {
+          return this.currentRandom.townName;
         }
-        case 'cityState': {
-          return this.currentRandom.cityState;
+        case 'townState': {
+          return this.currentRandom.townState;
         }
         case 'timezoneOffset': {
           return this.getDateFromTimeZone(this.currentRandom.timezoneOffset);
@@ -74,15 +68,12 @@ export class TownsComponent implements OnInit {
     }
   }
 
-  getDateFromTimeZone(offset) {
+  private getDateFromTimeZone(offset) {
     let offsetDate = new Date( new Date().getTime() + offset * 3600 * 1000).toUTCString().replace( / GMT$/, '' );
     return offsetDate;
   }
 
-  private handleCitiesSuccess(response) {
-    // console.log('handling cities');
-    // console.log(response);
-
+  private handleTownsSuccess(response) {
     if (JSON.stringify(response) === '\"No Results\"') {
       console.log('There were no results');
 
@@ -94,24 +85,22 @@ export class TownsComponent implements OnInit {
       this.resultValues = Object.values(response);
 
       // INITIALIZE showRandom
-      // @ts-ignore
-      if (this.results.length >= 3) {
+      if (Object.keys(this.results).length >= 3) {
         this.showRandom = true;
       } else {
         this.showRandom = false;
       }
-
     }
   }
 
-  private handleCitiesizeFailure(error) {
-    console.log('error handling cities');
+  private handleTownsFailure(error) {
+    console.log('error handling towns');
     console.log(error);
   }
 
   private handleRandomizeSuccess(response) {
-    this.currentRandom.setCityName(response.cityName);
-    this.currentRandom.setCityState(response.cityState);
+    this.currentRandom.setTownName(response.townName);
+    this.currentRandom.setTownState(response.townState);
     this.currentRandom.setTimeZoneOffset(response.timezoneOffset);
   }
 
@@ -126,5 +115,4 @@ export class TownsComponent implements OnInit {
       return 'hide-page';
     }
   }
-
 }
